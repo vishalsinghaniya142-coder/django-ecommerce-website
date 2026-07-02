@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping Cart</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛒 MyStore
+    </div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="{% url 'order_history' %}">My Orders</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+</nav>
+
+<h1 class="heading">🛒 My Shopping Cart</h1>
+
+<div class="container">
+
+{% for item in cart_items %}
+
+<div class="product">
+
+    {% if item.product.image %}
+        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+    {% endif %}
+
+    <h2>{{ item.product.name }}</h2>
+
+    <h3>₹{{ item.product.price }}</h3>
+
+<div class="quantity-box">
+
+    <a href="{% url 'decrease_quantity' item.id %}">
+        <button class="qty-btn">−</button>
+    </a>
+
+    <span class="qty">{{ item.quantity }}</span>
+
+    <a href="{% url 'increase_quantity' item.id %}">
+        <button class="qty-btn">+</button>
+    </a>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<h2>Your Cart is Empty 😔</h2>
+
+{% endfor %}
+
+</div>
+
+<div class="total-box">
+
+    <h2>Total Price</h2>
+
+    <h1>₹{{ total }}</h1>
+
+</div>
+<div class="cart-buttons">
+
+    <a href="/">
+        <button class="btn">
+            ⬅ Continue Shopping
+        </button>
+    </a>
+
+    <a href="{% url 'place_order' %}">
+        <button class="btn cart">
+            📦 Place Order
+        </button>
+    </a>
+
+</div>
+
+
+</body>
+</html>

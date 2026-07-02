@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-Commerce Store</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛒 MyStore
+    </div>
+    <form method="GET" action="/" class="search-box">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search Products..."
+    >
+
+    <button type="submit">🔍</button>
+
+</form>
+
+    <div class="nav-links">
+
+        {% if user.is_authenticated %}
+
+            <span class="welcome">👋 {{ user.username }}</span>
+
+            <a href="/">Home</a>
+            <a href="/cart/">Cart</a>
+            <a href="{% url 'order_history' %}">My Orders</a>
+            <a href="{% url 'logout' %}">Logout</a>
+
+        {% else %}
+
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+<h1 class="heading">Our Products</h1>
+
+<div class="container">
+
+{% for product in products %}
+
+<div class="product">
+
+    {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% endif %}
+
+    <h2>{{ product.name }}</h2>
+
+    <h3>₹{{ product.price }}</h3>
+
+    <p>{{ product.description }}</p>
+
+    <p><strong>Stock:</strong> {{ product.stock }}</p>
+
+    <a href="/product/{{ product.id }}/">
+        <button class="btn">View Details</button>
+    </a>
+
+    <a href="{% url 'add_to_cart' product.id %}">
+        <button class="btn cart">Add to Cart</button>
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+<footer class="footer">
+    <p>© 2026 MyStore | Developed by Vishal Singh</p>
+</footer>
+<footer class="footer">
+
+    <h3>🛒 MyStore</h3>
+
+    <p>Your Trusted Online Shopping Store</p>
+
+    <p>© 2026 MyStore | Developed by Vishal Singh</p>
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛒 MyStore
+    </div>
+
+    <div class="nav-links">
+
+        {% if user.is_authenticated %}
+
+            <span class="welcome">👋 {{ user.username }}</span>
+
+            <a href="/">Home</a>
+            <a href="/cart/">Cart</a>
+            <a href="{% url 'order_history' %}">My Orders</a>
+            <a href="{% url 'logout' %}">Logout</a>
+
+        {% else %}
+
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+<h1 class="heading">📱 Product Details</h1>
+
+<div class="container">
+
+    <div class="product">
+
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
+
+        <h2>{{ product.name }}</h2>
+
+        <h3>₹{{ product.price }}</h3>
+
+        <p>{{ product.description }}</p>
+
+        <p>
+            <strong>Stock:</strong>
+
+            {% if product.stock > 0 %}
+                <span style="color:green;">{{ product.stock }} Available</span>
+            {% else %}
+                <span style="color:red;">Out of Stock</span>
+            {% endif %}
+        </p>
+
+        <br>
+
+        <a href="/">
+            <button class="btn">
+                ⬅ Back to Home
+            </button>
+        </a>
+
+        <a href="{% url 'add_to_cart' product.id %}">
+            <button class="btn cart">
+                🛒 Add to Cart
+            </button>
+        </a>
+
+    </div>
+
+</div>
+
+<footer class="footer">
+
+    <h3>🛒 MyStore</h3>
+
+    <p>Your Trusted Online Shopping Store</p>
+
+    <p>© 2026 MyStore | Developed by Vishal Singh</p>
+
+</footer>
+
+</body>
+</html>

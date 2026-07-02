@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+
+        .success-box{
+            width:500px;
+            margin:100px auto;
+            background:white;
+            padding:40px;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,.15);
+            text-align:center;
+        }
+
+        .success-icon{
+            font-size:70px;
+        }
+
+        .success-box h1{
+            color:#198754;
+            margin-top:15px;
+        }
+
+        .success-box p{
+            font-size:18px;
+            color:#555;
+            margin:20px 0;
+        }
+
+        .continue-btn{
+            background:#198754;
+            color:white;
+            border:none;
+            padding:15px 30px;
+            font-size:17px;
+            border-radius:10px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .continue-btn:hover{
+            background:#157347;
+            transform:scale(1.05);
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="success-box">
+
+    <div class="success-icon">🎉</div>
+
+    <h1>Order Placed Successfully!</h1>
+
+    <p>
+        Thank you for shopping with us.<br>
+        Your order has been placed successfully.
+    </p>
+
+    <a href="/">
+        <button class="continue-btn">
+            🛍 Continue Shopping
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>
